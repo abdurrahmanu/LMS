@@ -3,7 +3,7 @@
     <div class="w-full max-w-md md:max-w-lg py-10 backdrop-blur-xs ring-[1px] ring-black p-8 rounded-lg shadow-md">
       <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
 
-    <img src="book-sketch.jpg" class="w-full absolute top-0 left-0 bottom-0 right-0 z-[-1] opacity-25" alt="">
+    <img src="/book-sketch.jpg" class="w-full absolute top-0 left-0 bottom-0 right-0 z-[-1] opacity-25" alt="">
 
       <form class="space-y-8">
         <div>

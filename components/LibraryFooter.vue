@@ -4,7 +4,7 @@
     <div class="font-bold space-4 md:flex-row flex-col flex max-w-[80%] mx-auto">
       <div>
         <div class="relative">
-          <img src="collect-and-read.jpg" class="w-32 absolute top-1/5 left-3/10">
+          <!-- <img src="/collect-and-read.jpg" class="w-32 absolute top-1/5 left-3/10"> -->
           <img src="/phone.jpg" class="w-120" alt="">
         </div>
       </div>
@@ -14,11 +14,12 @@
       </div>
     </div>
 
-
-    <!-- <div class="flex items-center gap-5 h-fit">
+    <!-- 
+    <div class="flex items-center gap-5 h-fit">
       <SVGAppstore class="w-14" />
       <SVGPlayStore class="w-14" />
-    </div> -->
+    </div> 
+    -->
 
     <div class="pt-36 container text-md mx-auto flex flex-col md:flex-row gap-32 justify-center md:items-start space-y-6 md:space-y-0">
       <!-- Logo & Name -->
@@ -64,8 +65,3 @@
 
   </footer>
 </template>
-
-<script setup>
-// Using NuxtIcon module or similar for icons
-</script>
-
