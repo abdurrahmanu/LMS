@@ -9,10 +9,6 @@
             <NuxtLink to="/account">
                 <LibraryButton text="Sign Up" />
             </NuxtLink>
-
-            <NuxtLink to="/start">
-                <LibraryButton text="Get Started" />
-            </NuxtLink>
         </div>
     </div>
 </template> 

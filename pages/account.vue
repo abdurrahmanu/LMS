@@ -11,8 +11,7 @@
           <input
             type="text"
             placeholder="Your Name"
-            class="w-full px-4 py-3 ring hover:ring-[1px] hover:ring-neutral-600 ring-white rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-          />
+            class="w-full px-4 py-3 ring hover:ring-[1px] hover:ring-neutral-600 ring-white rounded-md focus:outline-none focus:ring-2 focus:ring-black"/>
         </div>
 
         <div>
@@ -20,16 +19,21 @@
           <input
             type="email"
             placeholder="you@example.com"
-            class="w-full px-4 py-3 ring hover:ring-[1px] hover:ring-neutral-600 ring-white rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-          />
+            class="w-full px-4 py-3 ring hover:ring-[1px] hover:ring-neutral-600 ring-white rounded-md focus:outline-none focus:ring-2 focus:ring-black"/>
         </div>
 
         <button
         @click.prevent="authenticate"
           type="submit"
-          class="w-full bg-black text-white py-3 uppercase font-bold rounded-md hover:bg-white hover:ring-[1px] hover:ring-black hover:text-black transition-colors"
-        >
+          class="w-full bg-black text-white py-3 uppercase font-bold rounded-md hover:bg-white hover:ring-[1px] hover:ring-black hover:text-black transition-colors">
           Sign Up
+        </button>
+
+          <button
+        @click.prevent="loginWithGoogle"
+          type="submit"
+          class="w-full bg-black text-white py-3 uppercase font-bold rounded-md hover:bg-white hover:ring-[1px] hover:ring-black hover:text-black transition-colors">
+          Sign With Google
         </button>
 
         <div class="text-right mt-2">
@@ -38,15 +42,11 @@
       </form>
     </div>
   </div>
+
+  {{ useAuth() }}
 </template>
 
 <script setup>
 const router = useRouter()
-
-const authenticate = () => {
-  // Simulate authentication
-  setTimeout(() => {
-    router.push('/')
-  }, 1000)
-}
+const {loginWithGoogle} = useAuth()
 </script>

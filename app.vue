@@ -1,18 +1,11 @@
 <template>
-  <div class="no-scrollbar">
-    <LibraryNavbar />
-    <div class="min-h-screen max-w-[1440px] mx-auto"> 
+  <div class=" select-none">
+    <main class="main max-w-[1440px] mx-auto relative"> 
+      <LibraryNavbar />
       <div ref="animateEl" class="bg-[url('/home.jpg')] zoom scale-down"></div>
-
-      <SVGForwardButton 
-      v-if="isSignedIn"
-      @click.prevent="setSection"
-      class='w-8 fixed left-3 z-[10]' />
-      
       <NuxtPage />
-    </div>
-
-    <LibraryFooter v-if="isSignedIn" />
+      <LibraryFooter v-if="isSignedIn" />
+    </main>
   </div>
 
   <!-- <div class="slide slide-in-from-top left-0 top-0 bg-black"></div> -->
@@ -21,8 +14,12 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useSectionStore } from './store/sectionStore'
+import { authStore } from './store/authStore'
 
 const show = ref(false)
+
+const authstore = authStore()
+const {loadingApp, user, data} = storeToRefs(authstore)
 
 const sectionStore = useSectionStore()
 const {section, showPage} = storeToRefs(sectionStore)
@@ -42,27 +39,44 @@ onMounted(() => {
     showPage.value = true
   })
 
-  // const observer = new IntersectionObserver(
-  //   (entries) => {
-  //     entries.forEach((entry) => {
-  //       if (entry.isIntersecting) {
-  //         section.value = entry.target.id
-  //       }
-  //     })
-  //   },
-  //   {
-  //     threshold: 0.5,
-  //   }
-  // )
+onMounted( async () => {   
+  loadingApp.value = true
 
-  // if (section.value) {
-  //   const targetSection = document.getElementById(section.value)
-  //   observer.observe(targetSection)
-  // }
+  onAuthStateChanged(auth, async (user_) => {
+    user.value = user_
 
-  // onUnmounted(() => {
-  //   observer.disconnect()
-  // })
+    if (user.value?.emailVerified && navigator.onLine) {
+      if (!data.value) {
+        data.value = await getSingleDoc(user.value.uid)
+      }
+      if (!data.value) {
+        data.value = await addSingleDoc(user.value.uid)
+      }
+      if (data.value) {
+        login.value = true
+      }
+    }
+    
+    else {
+      login.value = false
+      data.value = null
+    }
+
+    loadingApp.value = false
+  })
+
+  watch(login, newVal => {
+    if (newVal) {
+      if (data.value) {
+        updateDataFromDB(data.value)
+      } 
+    }
+  })
+});
+
+onUnmounted(() => {
+  data.value = null
+})
 })
 
 </script>
@@ -141,5 +155,17 @@ onMounted(() => {
        url('/path-to-fonts/Gilroy-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: white;
 }
 </style>
